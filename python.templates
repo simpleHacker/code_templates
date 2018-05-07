@@ -1,0 +1,54 @@
+""" code_templates """
+
+# docopt
+"""
+<description>
+
+Usage:
+  <cmd> {options}
+
+Options:
+  -h --help
+  -f <log_file_name>    specify output log file
+  -e <dup_file_name>    exbytes duplicates file name
+  
+Example:
+      - defined run:
+        <cmd> <options>
+      - ...:
+        ....
+"""
+from docopt import docopt
+if __name__ == "__main__":
+  args = docopt(__doc__)
+
+
+# list to string
+attrs = ",".join(machines.getAttributes(node))
+
+# file operation
+with open(errfile, "a") as err:
+  err.write("======== Site %s ========\n" % site)
+
+# cmd running
+cmd = [...,...,...]
+response = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+stdout, stderr = response.communicate()
+if response.returncode:
+  raise Exception(stderr)
+
+# string regex matching
+## .... good: [**,**,**,..|]
+## bad: [**,**,**,..|]
+matches = re.match(r".*\n.*good:(.*)\nbad:(.*)\n", string, re.MULTILINE)
+good_str = matches.group(1)
+goods = good_str.split(",") if good_str else []
+bad_str = matches.group(2)
+bads = bad_str.split(",") if bad_str else []
+
+# itertool powerful:
+itertools.combinations(exbyte_dic.iteritems(), 2)  # permutation of combination of each two in dict
+
+# os file system operation
+## remove a file:
+os.remove(log_file_path)
