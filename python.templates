@@ -52,3 +52,15 @@ itertools.combinations(exbyte_dic.iteritems(), 2)  # permutation of combination 
 # os file system operation
 ## remove a file:
 os.remove(log_file_path)
+## split a pathname and get filename
+_, name = os.path.split(filename)
+## split a file name from postfix
+basename, _ = os.path.splittext(name)
+## form a full path name
+filename = os.path.join(dir+filename)
+
+# time op
+## get current date time in string in certain format. ex. YYYYMMDD_HHMMSS string
+time.strftime("%Y%m%d_%H%M%S")
+
+# argparse
