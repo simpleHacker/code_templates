@@ -22,13 +22,34 @@ from docopt import docopt
 if __name__ == "__main__":
   args = docopt(__doc__)
 
+# argparse - import argparse
+parser = argparse.ArgumentParser(
+  description="******",
+  formatter_class=argparse.ArgumentDefaultsHelpFormatter,
+  argument_default=argparse.SUPPRESS,
+  epilog="Examples:\n\
+    cmd -h ...")
+  parser.add_argument("-d", required=True, help="date of tkrmon log in New York time zone, format:  YYYYMMDD")
+  group = parser.add_mutually_exclusive_group(required=True)
+  group.add_argument("-x", help="Mutually exclusive with -k option", default="")
+  group.add_argument("-k", help="key of a security. Mutually exclusive with -x option.", default="")
+
+## parse the arguments using parse - arguments is from main(), will be sys.argv[1:]
+namespace = parser.parse_args(args=arguments)
+if namespace.m and namespace.p == "":
+  parser.error("-m and -p must be given together")
+
+# get dec number in hex:
+dec_num = int(<string>, 16) - 4 numbers hex
 
 # list to string
 attrs = ",".join(machines.getAttributes(node))
 
 # file operation
-with open(errfile, "a") as err:
-  err.write("======== Site %s ========\n" % site)
+with open(jsonfile, "a") as f:
+  data = json.load(f) # use import json
+  for line in err:
+    err.write("======== Site %s ========\n" % line)
 
 # cmd running
 cmd = [...,...,...]
@@ -36,6 +57,8 @@ response = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
 stdout, stderr = response.communicate()
 if response.returncode:
   raise Exception(stderr)
+if response.returncode:
+  print("CMD ERROR: " + stderr)
 
 # string regex matching
 ## .... good: [**,**,**,..|]
@@ -58,24 +81,47 @@ _, name = os.path.split(filename)
 basename, _ = os.path.splittext(name)
 ## form a full path name
 filename = os.path.join(dir+filename)
-
+## check file system status:
+statvfs = os.statvfs(folder)
+total_blk = float(statvfs.f_blocks)
+free_blk = statvfs.f_bfree
+free_percent = free_blk / total_blk
+## get file modified time:
+file_mod_time = os.stat(filename[-1]).st_mtime
+## make folder:
+os.makedirs(self.folder)
+## recursively remove all folder:
+shutil.rmtree(self.folder) # import shutil
 # time op
 ## get current date time in string in certain format. ex. YYYYMMDD_HHMMSS string
 time.strftime("%Y%m%d_%H%M%S")
+## get yesterday:
+yesterday = date.today() - timedelta(1)
+day = yesterday.strftime("%Y%m%d")
+# register logging:
+logging.getLogger(<app_name>)
+logging.basicConfig(format='%(asctime)s -%(levelname)s- %(message)s', level=logging.INFO, datefmt="%Y%m%d %H:%M:%S", filename=<...>, filemode='w')
+## lofgilename by date:
+logfilename = ()
 
-# argparse - import argparse
-parser = argparse.ArgumentParser(
-  description="******",
-  formatter_class=argparse.ArgumentDefaultsHelpFormatter,
-  argument_default=argparse.SUPPRESS,
-  epilog="Examples:\n\
-    cmd -h ...")
-  parser.add_argument("-d", required=True, help="date of tkrmon log in New York time zone, format:  YYYYMMDD")
-  group = parser.add_mutually_exclusive_group(required=True)
-  group.add_argument("-x", help="Mutually exclusive with -k option", default="")
-  group.add_argument("-k", help="key of a security. Mutually exclusive with -x option.", default="")
+# import a local lib dynamically:
+libPath = "../"
+if libPath not in sys.path:
+  sys.path.append(libPath)
+## then import the lib
 
-# parse the arguments using parse - arguments is from main(), will be sys.argv[1:]
-namespace = parser.parse_args(args=arguments)
-if namespace.m and namespace.p == "":
-  parser.error("-m and -p must be given together")
+# python unit test:
+class TargetClass(unittest.TestCase)
+  def setUp(self):
+    # set up for all test
+    pass
+  def test_function(self):
+    self.assertEqual(source, result)
+    with self.assertRaises(Exception):
+      function_couse_exception
+    self.assertTrue(target)
+  def tearDown(self):
+    # remove or release resource
+    pass
+  if __name__ == '__main__':
+    unittest.main()
