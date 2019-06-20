@@ -63,4 +63,19 @@ filename = os.path.join(dir+filename)
 ## get current date time in string in certain format. ex. YYYYMMDD_HHMMSS string
 time.strftime("%Y%m%d_%H%M%S")
 
-# argparse
+# argparse - import argparse
+parser = argparse.ArgumentParser(
+  description="******",
+  formatter_class=argparse.ArgumentDefaultsHelpFormatter,
+  argument_default=argparse.SUPPRESS,
+  epilog="Examples:\n\
+    cmd -h ...")
+  parser.add_argument("-d", required=True, help="date of tkrmon log in New York time zone, format:  YYYYMMDD")
+  group = parser.add_mutually_exclusive_group(required=True)
+  group.add_argument("-x", help="Mutually exclusive with -k option", default="")
+  group.add_argument("-k", help="key of a security. Mutually exclusive with -x option.", default="")
+
+# parse the arguments using parse - arguments is from main(), will be sys.argv[1:]
+namespace = parser.parse_args(args=arguments)
+if namespace.m and namespace.p == "":
+  parser.error("-m and -p must be given together")
