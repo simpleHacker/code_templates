@@ -1,0 +1,16 @@
+== string manipulation ==
+# replace everything before a string "/"
+sed 's#.*/##' ~/alltem.out > ~/tout
+# exact all functions from a .rb file and find each func name in a set of file, and output unique file name in a file
+for func in $(grep 'def [a-z]' libraries/os.rb | sed -e 's/ *def //' -e 's/(.*//');
+do grep -l "$func" templates/default/* > ~/tout;
+sort -u ~/tout ~/alltem.out -o ~/alltem.out; done
+# find all string patterns in a file from a set of files
+grep -F -f ~/alltem.out * > ~/tout
+# find string patterns in a file and add prefix to the patterns founded in place in all files
+cat ~/allfunc.out | xargs -i sed -i 's/{}/Bcpc::OSHelper.&/g' ~/recipeFuncs.out
+# insert a string in the middle of a string:
+sed -r -i -e 's/(make_config.*).*\)/\1, node\)/' ~/recipeFuncs.out  -- make_config(.....)
+
+== checking memory ==
+ ps -eo pmem,pcpu,vsize,pid,cmd | sort -k 1 -nr | head -5
