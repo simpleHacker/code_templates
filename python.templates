@@ -125,3 +125,84 @@ class TargetClass(unittest.TestCase)
     pass
   if __name__ == '__main__':
     unittest.main()
+
+* unittest
+[http://pythontesting.net/framework/unittest/unittest-introduction/]
+simple run like run regular python program:
+ python test.py -v
+
+* debuging with pdb
+import pdb; pdb.set_trace()
+pdb.pm()
+python -m pdb myscript.py
+
+== profiling with cProfile and pstats ==
+* python -m cProfile ***.py
+
+* python -m trace --trace test_fib.py
+
+* python -m trace --listfuncs test_fib.py
+
+* python -m trace --trackcalls test_fib.py
+
+* %timeit <function want to run>
+
+== python concept ==
+* array operation
+reverse travel array: for i in array[::-1]:
+set join operations is faster than manual list join
+
+* operater
+a if true else b : three way operater
+Iterator: when iterator is passed to the "iter" built-in function, "iter" will return the iterator itself. But when a container type is passed to "iter", a new iterator object will be returned each time.
+
+* Inner Function
+Major use for closures:
+https://realpython.com/blog/python/inner-functions-what-are-they-good-for/
+
+=== Functions ===
+* Python has specific rules for comparing tuples. It first compares items in index zero, then index one, then index two, and so on.
+
+* When you reference a variable in an expression, the Python interpreter will traverse the scope to resolve the reference in this order:
+1. The current function’s scope
+2. Any enclosing scopes (like other containing functions)
+3. The scope of the module that contains the code (also called the global scope)
+4. The built-in scope (that contains functions like len and str)
+If none of these places have a defined variable with the referenced name, then a NameError exception is raised.
+
+=== class ===
+But classes are more than that in Python. Classes are objects too.
+This object (the class) is itself capable of creating objects (the instances), and this is why it's a class.
+super(B, self).__init__(x) to invoke A's method
+
+But still, it's an object, and therefore:
+
+* you can assign it to a variable
+* you can copy it
+* you can add attributes to it
+* you can pass it as a function parameter
+
+type(name of the class,
+     tuple of the parent class (for inheritance, can be empty),
+     dictionary containing attributes names and values)
+
+in Python, classes are objects, and you can create a class on the fly, dynamically.
+
+    # __new__ is the method called before __init__
+    # it's the method that creates the object and returns it
+    # while __init__ just initializes the object passed as parameter
+    # you rarely use __new__, except when you want to control how the object
+    # is created.
+    # __call__ happend when you call a class like a function CLASS();
+* __init__: not a constructor, called after instance created
+* __repr__ - printable (and eval-able) represenation
+* __str__ - a nicely printable representation
+* __class__: the base type of the instance
+* __doc__: doc
+
+first parameter is the class, cls by convention
+
+=== metaclass ===
+metaclasses actually define the type of a class, not just a factory for it, so you can do much more with them. You can, for instance, define normal methods on the metaclass. These metaclass-methods are like classmethods, in that they can be called on the class without an instance, but they are also not like classmethods in that they cannot be called on an instance of the class. type.__subclasses__() is an example of a method on the type metaclass. You can also define the normal 'magic' methods, like __add__, __iter__ and __getattr__, to implement or change how the class behaves.
+
+ in python 3+ the __metaclass__ doesn't exist anymore. You should declare your class like class ClassName(metaclass=MetaClass)
