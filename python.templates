@@ -44,6 +44,19 @@ if namespace.m and namespace.p == "":
 # get dec number in hex:
 dec_num = int(<string>, 16) - 4 numbers hex
 
+# date to string in certain format
+datetime.strftime("%Y%m%d")  20210102
+
+# nano second, milli second
+import time
+time.time_ns() -- python3.7
+int(time.time() * 1000)  -- python2.7, but need os support second fractions
+
+# random function usages:
+ - get a number in range: random.randrange(0,11)
+ - get n non-deplicate elem in list, set: random.sample(list, n)
+ - get a elem in list, set: random.choice(list)
+
 # list to string
 attrs = ",".join(machines.getAttributes(node))
 
@@ -52,6 +65,18 @@ with open(jsonfile, "a") as f:
   data = json.load(f) # use import json
   for line in err:
     err.write("======== Site %s ========\n" % line)
+    
+# logging
+logging.basicConfig(format='%(asctime)s %(levelname)s %(filename)s::%(funcName)s(%(lineno)d): %(message)s', level=logging.INFO, filename=logfile)
+ - print out to console: (add a handler)
+   handler = logging.StreamHandler()
+   handler.setLevel(logging.INFO)
+   formatter = logging.Formatter('%(asctime)s %(message)s')
+   handler.setFormatter(formatter)
+   logging.getLogger('').addHandler(handler)
+ - sometime may need to remove preset handlers if not working:
+   for handler in logging.root.handlers[:]:
+       logging.root.removeHandler(handler)
 
 # cmd running
 cmd = [...,...,...]
