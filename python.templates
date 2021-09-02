@@ -86,6 +86,9 @@ if response.returncode:
   raise Exception(stderr)
 if response.returncode:
   print("CMD ERROR: " + stderr)
+  
+run a sustaining run cmd in remote machine without geting stuck and return immendiately:
+ssh host 'nohup cmd >/dev/null 2>&1 &'
 
 # string regex matching
 ## .... good: [**,**,**,..|]
