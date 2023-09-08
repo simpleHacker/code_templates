@@ -122,17 +122,25 @@ file_mod_time = os.stat(filename[-1]).st_mtime
 os.makedirs(self.folder)
 ## recursively remove all folder:
 shutil.rmtree(self.folder) # import shutil
+
 # time op
 ## get current date time in string in certain format. ex. YYYYMMDD_HHMMSS string
 time.strftime("%Y%m%d_%H%M%S")
 ## get yesterday:
 yesterday = date.today() - timedelta(1)
 day = yesterday.strftime("%Y%m%d")
+
 # register logging:
 logging.getLogger(<app_name>)
 logging.basicConfig(format='%(asctime)s -%(levelname)s- %(message)s', level=logging.INFO, datefmt="%Y%m%d %H:%M:%S", filename=<...>, filemode='w')
 ## lofgilename by date:
 logfilename = ()
+
+# call a function by using its name:
+getattr() can similarly be used on class instance bound methods, module-level methods, class methods...
+import foo
+bar = getattr(foo, 'bar')
+result = bar()
 
 # import a local lib dynamically:
 libPath = "../"
