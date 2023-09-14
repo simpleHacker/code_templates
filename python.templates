@@ -240,6 +240,20 @@ in Python, classes are objects, and you can create a class on the fly, dynamical
 
 first parameter is the class, cls by convention
 
+instance/class var/methods, static methods difference and usage [https://pynative.com/python-class-method/]
+
+==== decorate a class for a singleton ====
+class Singleton(type):
+    # singleton pattern usage:
+    # https://stackoverflow.com/questions/6760685/creating-a-singleton-in-python?page=1&tab=scoredesc#tab-top
+    _instances = {}
+    def __call__(cls, *args, **kwargs):
+        if cls not in cls._instances:
+            cls._instances[cls] = super(Singleton, cls).__call__(*args, **kwargs)
+        return cls._instances[cls]
+
+class Config(metaclass=Singleton):
+  pass
 === metaclass ===
 metaclasses actually define the type of a class, not just a factory for it, so you can do much more with them. You can, for instance, define normal methods on the metaclass. These metaclass-methods are like classmethods, in that they can be called on the class without an instance, but they are also not like classmethods in that they cannot be called on an instance of the class. type.__subclasses__() is an example of a method on the type metaclass. You can also define the normal 'magic' methods, like __add__, __iter__ and __getattr__, to implement or change how the class behaves.
 
