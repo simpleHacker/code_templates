@@ -174,6 +174,13 @@ import pdb; pdb.set_trace()
 pdb.pm()
 python -m pdb myscript.py
 
+# python shelve: a object persistent simple store
+## operate as dictionary, but can persistent on disc
+## writeback option provide a cache to mutate record on shelve in cache, but will slow done write back to disc if many updates when close()
+## read and write the whole record on shelve is okay
+## The shelve module does not support concurrent read/write access to shelved objects. (Multiple simultaneous read accesses are safe.) When a program has a shelf open for writing, no other program should have it open for reading or writing.
+##  The database is also (unfortunately) subject to the limitations of dbm, if it is used — this means that (the pickled representation of) the objects stored in the database should be fairly small, and in rare cases key collisions may cause the database to refuse updates.
+
 == profiling with cProfile and pstats ==
 * python -m cProfile ***.py
 
